@@ -37,13 +37,15 @@ open class ThemeManager: NSObject {
     open fileprivate(set) static var currentTheme      : NSDictionary?
     open fileprivate(set) static var currentThemePath  : ThemePath?
     open fileprivate(set) static var currentThemeIndex : Int = 0
-    
+    open fileprivate(set) static var currentThemeName  : String = "not-set"
+
     open class func setTheme(index: Int) {
         currentThemeIndex = index
         NotificationCenter.default.post(name: Notification.Name(rawValue: ThemeUpdateNotification), object: nil)
     }
     
     public class func setTheme(plistName: String, path: ThemePath) {
+        currentThemeName = plistName
         guard let plistPath = path.plistPath(name: plistName)         else {
             print("SwiftTheme WARNING: Not find plist '\(plistName)' with: \(path)")
             return
