@@ -39,6 +39,10 @@ extension UIBarButtonItem
 }
 extension UILabel
 {
+    public var theme_font: ThemeFontPicker? {
+        get { return getThemePicker(self, "setFont:") as? ThemeFontPicker }
+        set { setThemePicker(self, "setFont:", newValue) }
+    }
     public var theme_textColor: ThemeColorPicker? {
         get { return getThemePicker(self, "setTextColor:") as? ThemeColorPicker }
         set { setThemePicker(self, "setTextColor:", newValue) }
@@ -54,6 +58,10 @@ extension UILabel
 }
 extension UINavigationBar
 {
+    public var theme_barStyle: ThemeBarStylePicker? {
+        get { return getThemePicker(self, "setBarStyle:") as? ThemeBarStylePicker }
+        set { setThemePicker(self, "setBarStyle:", newValue) }
+    }
     public var theme_barTintColor: ThemeColorPicker? {
         get { return getThemePicker(self, "setBarTintColor:") as? ThemeColorPicker }
         set { setThemePicker(self, "setBarTintColor:", newValue) }
@@ -65,6 +73,10 @@ extension UINavigationBar
 }
 extension UITabBar
 {
+    public var theme_barStyle: ThemeBarStylePicker? {
+        get { return getThemePicker(self, "setBarStyle:") as? ThemeBarStylePicker }
+        set { setThemePicker(self, "setBarStyle:", newValue) }
+    }
     public var theme_barTintColor: ThemeColorPicker? {
         get { return getThemePicker(self, "setBarTintColor:") as? ThemeColorPicker }
         set { setThemePicker(self, "setBarTintColor:", newValue) }
@@ -79,6 +91,14 @@ extension UITableView
 }
 extension UITextField
 {
+    public var theme_font: ThemeFontPicker? {
+        get { return getThemePicker(self, "setFont:") as? ThemeFontPicker }
+        set { setThemePicker(self, "setFont:", newValue) }
+    }
+    public var theme_keyboardAppearance: ThemeKeyboardAppearancePicker? {
+        get { return getThemePicker(self, "setKeyboardAppearance:") as? ThemeKeyboardAppearancePicker }
+        set { setThemePicker(self, "setKeyboardAppearance:", newValue) }
+    }
     public var theme_textColor: ThemeColorPicker? {
         get { return getThemePicker(self, "setTextColor:") as? ThemeColorPicker }
         set { setThemePicker(self, "setTextColor:", newValue) }
@@ -86,6 +106,14 @@ extension UITextField
 }
 extension UITextView
 {
+    public var theme_font: ThemeFontPicker? {
+        get { return getThemePicker(self, "setFont:") as? ThemeFontPicker }
+        set { setThemePicker(self, "setFont:", newValue) }
+    }
+    public var theme_keyboardAppearance: ThemeKeyboardAppearancePicker? {
+        get { return getThemePicker(self, "setKeyboardAppearance:") as? ThemeKeyboardAppearancePicker }
+        set { setThemePicker(self, "setKeyboardAppearance:", newValue) }
+    }
     public var theme_textColor: ThemeColorPicker? {
         get { return getThemePicker(self, "setTextColor:") as? ThemeColorPicker }
         set { setThemePicker(self, "setTextColor:", newValue) }
@@ -93,6 +121,10 @@ extension UITextView
 }
 extension UIToolbar
 {
+    public var theme_barStyle: ThemeBarStylePicker? {
+        get { return getThemePicker(self, "setBarStyle:") as? ThemeBarStylePicker }
+        set { setThemePicker(self, "setBarStyle:", newValue) }
+    }
     public var theme_barTintColor: ThemeColorPicker? {
         get { return getThemePicker(self, "setBarTintColor:") as? ThemeColorPicker }
         set { setThemePicker(self, "setBarTintColor:", newValue) }
@@ -126,6 +158,14 @@ extension UISlider
 }
 extension UISearchBar
 {
+    public var theme_barStyle: ThemeBarStylePicker? {
+        get { return getThemePicker(self, "setBarStyle:") as? ThemeBarStylePicker }
+        set { setThemePicker(self, "setBarStyle:", newValue) }
+    }
+    public var theme_keyboardAppearance: ThemeKeyboardAppearancePicker? {
+        get { return getThemePicker(self, "setKeyboardAppearance:") as? ThemeKeyboardAppearancePicker }
+        set { setThemePicker(self, "setKeyboardAppearance:", newValue) }
+    }
     public var theme_barTintColor: ThemeColorPicker? {
         get { return getThemePicker(self, "setBarTintColor:") as? ThemeColorPicker }
         set { setThemePicker(self, "setBarTintColor:", newValue) }
@@ -158,6 +198,13 @@ extension UIImageView
     public var theme_image: ThemeImagePicker? {
         get { return getThemePicker(self, "setImage:") as? ThemeImagePicker }
         set { setThemePicker(self, "setImage:", newValue) }
+    }
+}
+extension UIActivityIndicatorView
+{
+    public var theme_activityIndicatorViewStyle: ThemeActivityIndicatorViewStylePicker? {
+        get { return getThemePicker(self, "setActivityIndicatorViewStyle:") as? ThemeActivityIndicatorViewStylePicker }
+        set { setThemePicker(self, "setActivityIndicatorViewStyle:", newValue) }
     }
 }
 extension UIButton

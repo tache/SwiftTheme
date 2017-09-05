@@ -16,7 +16,7 @@
 <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"></a>
 <a href="http://cocoadocs.org/docsets/SwiftTheme"><img src="https://img.shields.io/badge/CocoaPods-compatible-4BC51D.svg?style=flat"></a>
 <a href="https://github.com/jiecao-fm/SwiftTheme/blob/master/LICENSE"><img src="http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat"></a>
-<a href="https://github.com/jiecao-fm/SwiftTheme/tree/0.3"><img src="https://img.shields.io/badge/release-0.3-blue.svg"></a>
+<a href="https://github.com/jiecao-fm/SwiftTheme/tree/0.3.2"><img src="https://img.shields.io/badge/release-0.3.2-blue.svg"></a>
 <a href="https://travis-ci.org/jiecao-fm/SwiftTheme"><img src="https://travis-ci.org/jiecao-fm/SwiftTheme.svg"></a>
 <a href="https://codebeat.co/projects/github-com-jiecao-fm-swifttheme"><img alt="codebeat badge" src="https://codebeat.co/badges/900eef02-9b88-46eb-8ce9-440c1dc31435" /></a>
 </p>
@@ -45,40 +45,60 @@ Make SwiftTheme a simple, powerful, high-performance, extensible themes/skinning
 
 ### Index Mode
 
-Vary background color of UIView according to the theme setting?
+Vary background color of UIView according to the theme setting:
 
 ```swift
-view.theme_backgroundColor = ThemeColorPicker(colors: "#FFF", "#000")
+view.theme_backgroundColor = ["#FFF", "#000"]
 ```
 
-Vary text color of UILable and UIButton?
+Vary text color of UILable and UIButton:
 
 ```swift
-label.theme_textColor = ThemeColorPicker(colors: "#000", "#FFF")
-button.theme_setTitleColor(ThemeColorPicker(colors: "#000", "#FFF"), forState: .Normal)
+label.theme_textColor = ["#000", "#FFF"]
+button.theme_setTitleColor(["#000", "#FFF"], forState: .Normal)
 ```
 
-Vary image of UIImageView?
+Vary image of UIImageView:
 
 ```swift
-imageView.theme_image = ThemeImagePicker(names: "day", "night")
+imageView.theme_image = ["day", "night"]
+
+// It's ok by using UIImage instances if you don't want to use image names.
+imageView.theme_image = ThemeImagePicker(images: image1, image2)
 ```
 
-No problem! A miracle happens after you executing the one line of code below!
+A miracle happens after you executing the one line of code below!
 
 ```swift
 // these numbers represent the parameters' index. 
-// eg. "ThemeColorPicker(colors: "#000", "#FFF")", index 0 represents "#000", index 1 represents "#FFF"
+// eg. "view.theme_backgroundColor = ["#FFF", "#000"]", index 0 represents "#FFF", index 1 represents "#000"
 ThemeManager.setTheme(index: isNight ? 1 : 0)
 ```
 
-Then, get the current theme index.
+Get current theme index.
 
 ```swift
 ThemeManager.currentThemeIndex	// Readonly
 ```
 
 > Index mode is a fast way for the situation: a few themes, but not many, no need to download more new themes.
+
+Notice About Literal:
+
+```swift
+// Wrong example:
+let colors = ["#FFF", "#000"]
+view.theme_backgroundColor = colors
+
+// You should write like this:
+view.theme_backgroundColor = ["#FFF", "#000"]
+// or this:
+let colorPickers: ThemeColorPicker = ["#FFF", "#000"]
+view.theme_backgroundColor = colorPickers
+```
+
+> Because theme_backgroundColor accepts an argument of type ThemeColorPicker，not Array. Nevertheless, "view.theme_backgroundColor = ["#FFF", "#000"]" does the same as initializing an instance of ThemeColorPicker by "Literal" and passing it to the theme_backgroundColor.
+
 
 
 ### Plist Mode
@@ -87,8 +107,8 @@ You may want to make you app download and install an indefinite number of themes
 Usage demo of plist mode.
 
 ```swift
-view.theme_backgroundColor = ThemeColorPicker(keyPath: "Global.backgroundColor")
-imageView.theme_image = ThemeImagePicker(keyPath: "SelectedThemeCell.iconImage")
+view.theme_backgroundColor = "Global.backgroundColor"
+imageView.theme_image = "SelectedThemeCell.iconImage"
 ```
 > Similar with the index mode. Only the specific parameters become keys. And as such, we give it the extension ability.
 
@@ -144,9 +164,6 @@ use_frameworks!
 ```swift
 github "jiecao-fm/SwiftTheme"
 ```
-
-#### Framework
-Build the source project, drop the SwiftTheme.framework into your project
 
 #### Source files（iOS7）
 Copy all the files in "Source" folder into your project
@@ -223,27 +240,34 @@ NotificationCenter.default.addObserver(
 - var theme_tintColor: ThemeColorPicker?
 
 ##### UILabel
+- var theme_font: ThemeFontPicker?
 - var theme_textColor: ThemeColorPicker?
 - var theme_highlightedTextColor: ThemeColorPicker?
 - var theme_shadowColor: ThemeColorPicker?
 
 ##### UINavigationBar
+- var theme_barStyle: ThemeBarStylePicker?
 - var theme_barTintColor: ThemeColorPicker?
 - var theme_titleTextAttributes: ThemeDictionaryPicker?
 
 ##### UITabBar
+- var theme_barStyle: ThemeBarStylePicker?
 - var theme_barTintColor: ThemeColorPicker?
 
 ##### UITableView
 - var theme_separatorColor: ThemeColorPicker?
 
 ##### UITextField
+- var theme_font: ThemeFontPicker?
+- var theme_keyboardAppearance: ThemeKeyboardAppearancePicker?
 - var theme_textColor: ThemeColorPicker?
 
 ##### UITextView
+- var theme_font: ThemeFontPicker?
 - var theme_textColor: ThemeColorPicker?
 
 ##### UIToolbar
+- var theme_barStyle: ThemeBarStylePicker?
 - var theme_barTintColor: ThemeColorPicker?
 
 ##### UISwitch
@@ -256,6 +280,7 @@ NotificationCenter.default.addObserver(
 - var theme_maximumTrackTintColor: ThemeColorPicker?
 
 ##### UISearchBar
+- var theme_barStyle: ThemeBarStylePicker?
 - var theme_barTintColor: ThemeColorPicker?
 
 ##### UIProgressView
@@ -269,12 +294,17 @@ NotificationCenter.default.addObserver(
 ##### UIImageView
 - var theme_image: ThemeImagePicker?
 
+##### UIActivityIndicatorView
+- var theme_activityIndicatorViewStyle: ThemeActivityIndicatorViewStylePicker?
+
 ##### UIButton
 - func theme_setImage(picker: ThemeImagePicker, forState state: UIControlState)
 - func theme_setBackgroundImage(picker: ThemeImagePicker, forState state: UIControlState)
 - func theme_setTitleColor(picker: ThemeColorPicker, forState state: UIControlState)
 
 ##### CALayer
+- var theme_backgroundColor: ThemeCGColorPicker?
+- var theme_borderWidth: ThemeCGFloatPicker?
 - var theme_borderColor: ThemeCGColorPicker?
 - var theme_shadowColor: ThemeCGColorPicker?
 
@@ -328,6 +358,15 @@ ThemeCGColorPicker(keyPath: "someStringKeyPath")
 ThemeCGColorPicker.pickerWithKeyPath("someStringKeyPath")
 ```
 
+#### ThemeFontPicker
+```swift
+①
+ThemeFontPicker(fonts: UIFont.systemFont(ofSize: 10), UIFont.systemFont(ofSize: 11))
+ThemeFontPicker.pickerWithFonts([UIFont.systemFont(ofSize: 10), UIFont.systemFont(ofSize: 11)])
+②
+// Reading font from plist is not supported now
+```
+
 #### ThemeDictionaryPicker
 ```swift
 ①
@@ -337,15 +376,52 @@ ThemeDictionaryPicker.pickerWithDicts([["key": "value"], ["key": "value"]])
 // Reading dictionary from plist is not supported now
 ```
 
+#### ThemeBarStylePicker
+```swift
+①
+ThemeBarStylePicker(styles: .default, .black)
+ThemeBarStylePicker.pickerWithStyles([.default, .black])
+ThemeBarStylePicker.pickerWithStringStyles(["default", "black"])
+②
+// name the key you like, but the available values are "default" and "black"
+ThemeBarStylePicker(keyPath: "someStringKeyPath")
+ThemeBarStylePicker.pickerWithKeyPath("someStringKeyPath")
+```
+
 #### ThemeStatusBarStylePicker
 ```swift
 ①
-ThemeStatusBarStylePicker(styles: .Default, .LightContent)
-ThemeStatusBarStylePicker.pickerWithStyles([.Default, .LightContent])
+ThemeStatusBarStylePicker(styles: .default, .lightContent)
+ThemeStatusBarStylePicker.pickerWithStyles([.default, .lightContent])
+ThemeStatusBarStylePicker.pickerWithStringStyles(["default", "lightContent"])
 ②
-// name the key you like, but the available values are "UIStatusBarStyleDefault" and "UIStatusBarStyleLightContent"
+// name the key you like, but the available values are "default" and "lightContent"
 ThemeStatusBarStylePicker(keyPath: "someStringKeyPath")
 ThemeStatusBarStylePicker.pickerWithKeyPath("someStringKeyPath")
+```
+
+#### ThemeKeyboardAppearancePicker
+```swift
+①
+ThemeKeyboardAppearancePicker(styles: .default, .dark, .light)
+ThemeKeyboardAppearancePicker.pickerWithStyles([.default, .dark, .light])
+ThemeKeyboardAppearancePicker.pickerWithStringStyles(["default", "dark", "light"])
+②
+// name the key you like, but the available values are "default", "dark" and "light"
+ThemeKeyboardAppearancePicker(keyPath: "someStringKeyPath")
+ThemeKeyboardAppearancePicker.pickerWithKeyPath("someStringKeyPath")
+```
+
+#### ThemeActivityIndicatorViewStylePicker
+```swift
+①
+ThemeActivityIndicatorViewStylePicker(styles: .whiteLarge, .white, .gray)
+ThemeActivityIndicatorViewStylePicker.pickerWithStyles([.whiteLarge, .white, .gray])
+ThemeActivityIndicatorViewStylePicker.pickerWithStringStyles(["whiteLarge", "white", "gray"])
+②
+// name the key you like, but the available values are "whiteLarge", "white" and "gray"
+ThemeActivityIndicatorViewStylePicker(keyPath: "someStringKeyPath")
+ThemeActivityIndicatorViewStylePicker.pickerWithKeyPath("someStringKeyPath")
 ```
 
 ### *More*

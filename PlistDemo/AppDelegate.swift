@@ -15,24 +15,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        // default: Red.plist
+        
         ThemeManager.setTheme(plistName: "Red", path: .mainBundle)
         
         // status bar
         
-        let statusPicker = ThemeStatusBarStylePicker(keyPath: "UIStatusBarStyle")
-        UIApplication.shared.theme_setStatusBarStyle(statusPicker, animated: true)
+        UIApplication.shared.theme_setStatusBarStyle("UIStatusBarStyle", animated: true)
         
         // navigation bar
         
         let navigationBar = UINavigationBar.appearance()
-        navigationBar.theme_tintColor = globalBarTextColorPicker
-        navigationBar.theme_barTintColor = globalBarTintColorPicker
+        
+        navigationBar.theme_tintColor = "Global.barTextColor"
+        navigationBar.theme_barTintColor = "Global.barTintColor"
+        
+        navigationBar.theme_titleTextAttributes = ThemeDictionaryPicker(keyPath: "Global.barTextColor", map: { value in
+            guard
+                let rgba = value as? String,
+                let color = try? UIColor(rgba_throws: rgba) else {
+                    return nil
+            }
+            
+            let shadow = NSShadow(); shadow.shadowOffset = CGSize.zero
+            let titleTextAttributes = [
+                NSForegroundColorAttributeName: color,
+                NSFontAttributeName: UIFont.systemFont(ofSize: 16),
+                NSShadowAttributeName: shadow
+            ]
+            
+            return titleTextAttributes
+        })
         
         // tab bar
         
         let tabBar = UITabBar.appearance()
-        tabBar.theme_tintColor = globalBarTextColorPicker
-        tabBar.theme_barTintColor = globalBarTintColorPicker
+
+        tabBar.theme_tintColor = "Global.barTextColor"
+        tabBar.theme_barTintColor = "Global.barTintColor"
         
         return true
     }

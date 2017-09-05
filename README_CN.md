@@ -16,7 +16,7 @@
 <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"></a>
 <a href="http://cocoadocs.org/docsets/SwiftTheme"><img src="https://img.shields.io/badge/CocoaPods-compatible-4BC51D.svg?style=flat"></a>
 <a href="https://github.com/jiecao-fm/SwiftTheme/blob/master/LICENSE"><img src="http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat"></a>
-<a href="https://github.com/jiecao-fm/SwiftTheme/tree/0.3"><img src="https://img.shields.io/badge/release-0.3-blue.svg"></a>
+<a href="https://github.com/jiecao-fm/SwiftTheme/tree/0.3.2"><img src="https://img.shields.io/badge/release-0.3.2-blue.svg"></a>
 <a href="https://travis-ci.org/jiecao-fm/SwiftTheme"><img src="https://travis-ci.org/jiecao-fm/SwiftTheme.svg"></a>
 <a href="https://codebeat.co/projects/github-com-jiecao-fm-swifttheme"><img alt="codebeat badge" src="https://codebeat.co/badges/900eef02-9b88-46eb-8ce9-440c1dc31435" /></a>
 </p>
@@ -42,34 +42,36 @@
 
 ### 索引方式
 
-让 `UIView` 随主题变换背景色？
+让 `UIView` 随主题变换背景色：
 
 ```swift
-view.theme_backgroundColor = ThemeColorPicker(colors: "#FFF", "#000")
+view.theme_backgroundColor = ["#FFF", "#000"]
 ```
 
-让 `UILabel` 和 `UIButton` 随主题变换文字颜色？
+让 `UILabel` 和 `UIButton` 随主题变换文字颜色：
 
 ```swift
-label.theme_textColor = ThemeColorPicker(colors: "#000", "#FFF")
-button.theme_setTitleColor(ThemeColorPicker(colors: "#000", "#FFF"), forState: .Normal)
+label.theme_textColor = ["#000", "#FFF"]
+button.theme_setTitleColor(["#000", "#FFF"], forState: .Normal)
 ```
 
-让 `UIImageView` 随主题变换切图？
+让 `UIImageView` 随主题变换切图：
 
 ```swift
-imageView.theme_image = ThemeImagePicker(names: "day", "night")
+imageView.theme_image = ["day", "night"]
+
+// 不想通过切图名，想通过 UIImage 来设置不同主题的图片也是可以的
+imageView.theme_image = ThemeImagePicker(images: image1, image2)
 ```
 
-没问题，当你执行如下代码时，奇迹发生了！
+然后，当你执行如下代码时，奇迹发生了！
 
 ```swift
-// 这里的数字代表主题参数的索引
-// 例如 "ThemeColorPicker(colors: "#000", "#FFF")", 索引 0 代表 "#000", 索引 1 代表 "#FFF"
+// 例如isNight为true，imageView将会使用 "night" 的切图
 ThemeManager.setTheme(index: isNight ? 1 : 0)
 ```
 
-想知道当前的索引？
+随时获取当前主题的索引：
 
 ```swift
 ThemeManager.currentThemeIndex	// Readonly
@@ -77,17 +79,35 @@ ThemeManager.currentThemeIndex	// Readonly
 
 > 直接根据索引切换主题，便于快速开发。适合主题不多、无需下载主题的App。
 
+关于字面量需要注意的：
+
+```swift
+// 以下的写法是错误的
+let colors = ["#FFF", "#000"]
+view.theme_backgroundColor = colors
+
+// 应该这样
+view.theme_backgroundColor = ["#FFF", "#000"]
+// 或者
+let colorPickers: ThemeColorPicker = ["#FFF", "#000"]
+view.theme_backgroundColor = colorPickers
+```
+
+> 因为 theme_backgroundColor 接受的是ThemeColorPicker 类型的参数，而不是Array，而 view.theme_backgroundColor = ["#FFF", "#000"] 其实是用字面量初始化一个ThemeColorPicker 并赋值给theme_backgroundColor
+
+
+
 
 ### plist 方式
-为了满足通过网络下载和安装主题包的需求，我们支持以`plist`配置主题。简单讲就是在`plist` 中记录配置参数，比如背景色、切图文件名等，在代码中通过`key`来指定相应的参数。因此，该`plist`文件以及用到的资源文件就组成了一个主题包。
+为了满足通过网络下载和安装主题包的需求，我们支持以`plist`配置主题。简单讲就是在`plist` 中记录配置参数，比如背景色、切图文件名等，在代码中通过`keyPath`来指定相应的位置。因此，该`plist`文件以及用到的资源文件就组成了一个主题包。
 
 以下为用法示例：
 
 ```swift
-view.theme_backgroundColor = ThemeColorPicker(keyPath: "Global.backgroundColor")
-imageView.theme_image = ThemeImagePicker(keyPath: "SelectedThemeCell.iconImage")
+view.theme_backgroundColor = "Global.backgroundColor"
+imageView.theme_image = "SelectedThemeCell.iconImage"
 ```
-> 与索引方式类似，只是具体的参数值变为了间接的`key`名称，正因如此赋予了它扩展的能力。
+> 与索引方式类似，只是具体的参数值变为了`plist`中的`keyPath`，正因如此赋予了它扩展的能力。
 
 
 切换主题时参数为`plist`名称，这里以`bundle`中的`plist`文件及资源文件为例，使用沙箱中的文件也是可以的。
@@ -144,7 +164,7 @@ lbl.theme_backgroundColor = [ThemeColorPicker pickerWithColors:@[@"#FAF9F9", @"#
 ## 安装
 
 > *CocoaPods、Carthage和Framework安装基于动态链接库，动态链接库最低支持iOS8。*
-> 
+>
 > **如果你的项目需要支持iOS7，请手动拷贝源文件**
 
 #### CocoaPods
@@ -157,9 +177,6 @@ use_frameworks!
 ```swift
 github "jiecao-fm/SwiftTheme"
 ```
-
-#### Framework
-运行项目中名为`SwiftTheme`的Target，将生成的`framework`链到你自己的项目中
 
 #### 源文件（iOS7）
 拷贝`Source`文件夹下的所有文件到你的项目中
@@ -183,27 +200,34 @@ github "jiecao-fm/SwiftTheme"
 - var theme_tintColor: ThemeColorPicker?
 
 ##### UILabel
+- var theme_font: ThemeFontPicker?
 - var theme_textColor: ThemeColorPicker?
 - var theme_highlightedTextColor: ThemeColorPicker?
 - var theme_shadowColor: ThemeColorPicker?
 
 ##### UINavigationBar
+- var theme_barStyle: ThemeBarStylePicker?
 - var theme_barTintColor: ThemeColorPicker?
 - var theme_titleTextAttributes: ThemeDictionaryPicker?
 
 ##### UITabBar
+- var theme_barStyle: ThemeBarStylePicker?
 - var theme_barTintColor: ThemeColorPicker?
 
 ##### UITableView
 - var theme_separatorColor: ThemeColorPicker?
 
 ##### UITextField
+- var theme_font: ThemeFontPicker?
+- var theme_keyboardAppearance: ThemeKeyboardAppearancePicker?
 - var theme_textColor: ThemeColorPicker?
 
 ##### UITextView
+- var theme_font: ThemeFontPicker?
 - var theme_textColor: ThemeColorPicker?
 
 ##### UIToolbar
+- var theme_barStyle: ThemeBarStylePicker?
 - var theme_barTintColor: ThemeColorPicker?
 
 ##### UISwitch
@@ -216,6 +240,7 @@ github "jiecao-fm/SwiftTheme"
 - var theme_maximumTrackTintColor: ThemeColorPicker?
 
 ##### UISearchBar
+- var theme_barStyle: ThemeBarStylePicker?
 - var theme_barTintColor: ThemeColorPicker?
 
 ##### UIProgressView
@@ -229,12 +254,16 @@ github "jiecao-fm/SwiftTheme"
 ##### UIImageView
 - var theme_image: ThemeImagePicker?
 
+##### UIActivityIndicatorView
+- var theme_activityIndicatorViewStyle: ThemeActivityIndicatorViewStylePicker?
+
 ##### UIButton
 - func theme_setImage(picker: ThemeImagePicker, forState state: UIControlState)
 - func theme_setBackgroundImage(picker: ThemeImagePicker, forState state: UIControlState)
 - func theme_setTitleColor(picker: ThemeColorPicker, forState state: UIControlState)
 
 ##### CALayer
+- var theme_backgroundColor: ThemeCGColorPicker?
 - var theme_borderWidth: ThemeCGFloatPicker?
 - var theme_borderColor: ThemeCGColorPicker?
 - var theme_shadowColor: ThemeCGColorPicker?
@@ -289,6 +318,15 @@ ThemeCGColorPicker(keyPath: "someStringKeyPath")
 ThemeCGColorPicker.pickerWithKeyPath("someStringKeyPath")
 ```
 
+#### ThemeFontPicker
+```swift
+①
+ThemeFontPicker(fonts: UIFont.systemFont(ofSize: 10), UIFont.systemFont(ofSize: 11))
+ThemeFontPicker.pickerWithFonts([UIFont.systemFont(ofSize: 10), UIFont.systemFont(ofSize: 11)])
+②
+// 暂时不支持从`plist`中读取字体
+```
+
 #### ThemeDictionaryPicker
 ```swift
 ①
@@ -298,16 +336,56 @@ ThemeDictionaryPicker.pickerWithDicts([["key": "value"], ["key": "value"]])
 // 暂时不支持从`plist`中读取字典
 ```
 
+#### ThemeBarStylePicker
+```swift
+①
+ThemeBarStylePicker(styles: .default, .black)
+ThemeBarStylePicker.pickerWithStyles([.default, .black])
+ThemeBarStylePicker.pickerWithStringStyles(["default", "black"])
+②
+// 在自定的`Key`中设置指定的`Value`，匹配字符串即可生效
+// 可选的值有："default" 和 "black"
+ThemeBarStylePicker(keyPath: "someStringKeyPath")
+ThemeBarStylePicker.pickerWithKeyPath("someStringKeyPath")
+```
+
 #### ThemeStatusBarStylePicker
 ```swift
 ①
-ThemeStatusBarStylePicker(styles: .Default, .LightContent)
-ThemeStatusBarStylePicker.pickerWithStyles([.Default, .LightContent])
+ThemeStatusBarStylePicker(styles: .default, .lightContent)
+ThemeStatusBarStylePicker.pickerWithStyles([.default, .lightContent])
+ThemeStatusBarStylePicker.pickerWithStringStyles(["default", "lightContent"])
 ②
 // 在自定的`Key`中设置指定的`Value`，匹配字符串即可生效
-// 可选的值有："UIStatusBarStyleDefault" 和 "UIStatusBarStyleLightContent"
+// 可选的值有："default" 和 "lightContent"
 ThemeStatusBarStylePicker(keyPath: "someStringKeyPath")
 ThemeStatusBarStylePicker.pickerWithKeyPath("someStringKeyPath")
+```
+
+#### ThemeKeyboardAppearancePicker
+```swift
+①
+ThemeKeyboardAppearancePicker(styles: .default, .dark, .light)
+ThemeKeyboardAppearancePicker.pickerWithStyles([.default, .dark, .light])
+ThemeKeyboardAppearancePicker.pickerWithStringStyles(["default", "dark", "light"])
+②
+// 在自定的`Key`中设置指定的`Value`，匹配字符串即可生效
+// 可选的值有："default"、"dark" 和 "light"
+ThemeKeyboardAppearancePicker(keyPath: "someStringKeyPath")
+ThemeKeyboardAppearancePicker.pickerWithKeyPath("someStringKeyPath")
+```
+
+#### ThemeActivityIndicatorViewStylePicker
+```swift
+①
+ThemeActivityIndicatorViewStylePicker(styles: .whiteLarge, .white, .gray)
+ThemeActivityIndicatorViewStylePicker.pickerWithStyles([.whiteLarge, .white, .gray])
+ThemeActivityIndicatorViewStylePicker.pickerWithStringStyles(["whiteLarge", "white", "gray"])
+②
+// 在自定的`Key`中设置指定的`Value`，匹配字符串即可生效
+// 可选的值有："whiteLarge"、"white" 和 "gray"
+ThemeActivityIndicatorViewStylePicker(keyPath: "someStringKeyPath")
+ThemeActivityIndicatorViewStylePicker.pickerWithKeyPath("someStringKeyPath")
 ```
 
 ### *更多*
@@ -320,11 +398,11 @@ ThemeStatusBarStylePicker.pickerWithKeyPath("someStringKeyPath")
 ## 常见问题
 
 1.  使用theme_setStatusBarStyle设置状态栏样式时没有任何效果，为什么？
-    
+
     答：你需要将`Info.plist`中的`View Controller-based status bar appearence`设置为`NO`。
 
 2.  我可以手动取消某个属性的主题吗？
-    
+
     答：可以，传入`nil`即可，例如 `view.theme_backgroundColor = nil`。
 
 ## 贡献
