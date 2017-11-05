@@ -32,3 +32,5 @@ xcuserdata
 
 # xcshareddata
 
+DerivedData/
+Pods/
