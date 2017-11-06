@@ -12,11 +12,11 @@
 
 <p align="center">
 <a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/language-swift3-f48041.svg?style=flat"></a>
-<a href="https://developer.apple.com/ios"><img src="https://img.shields.io/badge/platform-iOS%207%2B-blue.svg?style=flat"></a>
+<a href="https://developer.apple.com/ios"><img src="https://img.shields.io/badge/platform-iOS%208%2B-blue.svg?style=flat"></a>
 <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"></a>
 <a href="http://cocoadocs.org/docsets/SwiftTheme"><img src="https://img.shields.io/badge/CocoaPods-compatible-4BC51D.svg?style=flat"></a>
 <a href="https://github.com/jiecao-fm/SwiftTheme/blob/master/LICENSE"><img src="http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat"></a>
-<a href="https://github.com/jiecao-fm/SwiftTheme/tree/0.3.2"><img src="https://img.shields.io/badge/release-0.3.2-blue.svg"></a>
+<a href="https://github.com/jiecao-fm/SwiftTheme/tree/0.4.0"><img src="https://img.shields.io/badge/release-0.4.0-blue.svg"></a>
 <a href="https://travis-ci.org/jiecao-fm/SwiftTheme"><img src="https://travis-ci.org/jiecao-fm/SwiftTheme.svg"></a>
 <a href="https://codebeat.co/projects/github-com-jiecao-fm-swifttheme"><img alt="codebeat badge" src="https://codebeat.co/badges/900eef02-9b88-46eb-8ce9-440c1dc31435" /></a>
 </p>
@@ -30,9 +30,9 @@
 ## Introduction
 ### The Beginning Of The Story
 
-As the project requirement, we need to add night mode to our app [节操精选](http://um0.cn/5FpZs). It's not as simple as changing brightness or alpha only on the top-level view. In fact, it need a entirely new interface: different colors, different alpha, different image cuts. More accurately, so called "night mode" is themes/skinning feature that can switch between a bright theme and a dark theme.
+As part of our project requirement, we need to add night mode to our app [节操精选](http://um0.cn/5FpZs). It's not as simple as just changing brightness or alpha on the top-level view—in fact, it needs an entirely new interface: different colors, different alpha, different image cuts. More accurately, "night mode" is a theme/skinning feature that can switch between bright theme and dark themes.
 
-How to achieve this? Maybe we can set a global variable represents current selected theme, use different background colors or different image cuts based on the variable during the controllers initialization. But how to deal with the views that have been initialized? Yes, maybe you think we can use notification to change their colors or image cuts. Thought here, you should premonition that your controllers will be filled up with notification register/unregister, if...else and UI updating codes. Worse, if you forget to unregister the notifications app may crash.
+So how do we achieve this? Maybe we can set a global variable that represents the currently selected theme, and use different background colors or image cuts based on the variable during the controller's initialization. But then how do we deal with views that have already been initialized? Yes, we could use notifications to change their colors or image cuts, but this leads to controllers unnecessarily full of notification register/unregister, if...else and UI updating code. Worse, if you forget to unregister the notifications, your app may crash.
 
 After some consideration, we put forward higher requirements on the task: create a simple and reusable themes/skinning framework, here as you see.
 
@@ -67,7 +67,7 @@ imageView.theme_image = ["day", "night"]
 imageView.theme_image = ThemeImagePicker(images: image1, image2)
 ```
 
-A miracle happens after you executing the one line of code below!
+A miracle happens after you execute the single line of code below!
 
 ```swift
 // these numbers represent the parameters' index. 
@@ -102,7 +102,7 @@ view.theme_backgroundColor = colorPickers
 
 
 ### Plist Mode
-You may want to make you app download and install an indefinite number of themes. To fulfill this requirement, we provide the plist mode. Simply put, you write the configurations in a plist file, such as colors, image cuts and so on. Then, you can use their keys in the logic code. So, the plist file and the resource files it used constitute a theme package.
+You may want to make your app download and install an indefinite number of themes. To fulfill this requirement, we provide plist mode. Simply put, you write configuration info such as colors, image cuts and so on, in a plist file. Then, you can use their keys in the logic code. So, the plist file and the resource files are used to constitute a theme package.
 
 Usage demo of plist mode.
 
@@ -150,10 +150,6 @@ lbl.theme_backgroundColor = [ThemeColorPicker pickerWithColors:@[@"#FAF9F9", @"#
 
 ## Installation
 
-> *Swift code is built as dynamic framework by CocoaPods, Carthage and the project itself, while dynamic frameworks works on iOS8+*
->
-> **If you want it work on iOS7, you should copy the source files into you project**
-
 #### CocoaPods
 ```swift
 pod 'SwiftTheme'
@@ -165,7 +161,7 @@ use_frameworks!
 github "jiecao-fm/SwiftTheme"
 ```
 
-#### Source files（iOS7）
+#### Source files
 Copy all the files in "Source" folder into your project
 
 ## Documents
@@ -175,9 +171,9 @@ Note：`①` usage of index mode `②` usage of plist mode
 ### *Basic Usage*
 ***
 
-#### Configurate Appearance
+#### Configure Appearance
 
-SwiftTheme provide new properties for views, they all beigin with `theme_`. Such as `theme_backgroundColor` corresponds `backgroundColor`.
+SwiftTheme provides new properties for views, they all beigin with `theme_`. Such as `theme_backgroundColor` corresponds `backgroundColor`.
 
 ```swift
 ①
@@ -372,6 +368,7 @@ ThemeFontPicker.pickerWithFonts([UIFont.systemFont(ofSize: 10), UIFont.systemFon
 ①
 ThemeDictionaryPicker(dicts: ["key": "value"], ["key": "value"])
 ThemeDictionaryPicker.pickerWithDicts([["key": "value"], ["key": "value"]])
+ThemeDictionaryPicker.pickerWithAttributes([NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16)])
 ②
 // Reading dictionary from plist is not supported now
 ```
@@ -433,13 +430,13 @@ Download this project and find more. There are two demo targets:
 
 ## FAQ
 
-1.  Why theme_setStatusBarStyle doesn't work as expected?
+1.  Why doesn't theme_setStatusBarStyle work as expected?
 
-    You will need to `Info.plist` in `View Controller-based status bar appearence` set to `NO`.
+    In your app's `Info.plist` you will need to set `View Controller-based status bar appearence` to `NO`.
     
 2.  Can I manually cancel the theme of a property?
 
-    Sure, make `nil`. example: `view.theme_backgroundColor = nil`.
+    Sure, just make it `nil`—example: `view.theme_backgroundColor = nil`.
 
 ## Contribution
 
@@ -448,7 +445,7 @@ If you find a bug or need a help, you can [create a issue](https://github.com/ji
 
 
 ### Pull Request
-Expect your pull request :D. But please make sure it's needed by most developers and make it simple to use. If you are not sure you can create a issue and let's discuss before coding.
+We are happy to accept pull requests :D. But please make sure it's needed by most developers and make it simple to use. If you are not sure, create an issue and we can discuss it before you get to coding.
 
 ### Contributors
 [GeSen](https://github.com/wxxsw), [Zhoujun](https://github.com/shannonchou)
