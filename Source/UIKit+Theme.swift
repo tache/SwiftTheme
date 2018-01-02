@@ -74,6 +74,10 @@ import UIKit
         get { return getThemePicker(self, "setTitleTextAttributes:") as? ThemeDictionaryPicker }
         set { setThemePicker(self, "setTitleTextAttributes:", newValue) }
     }
+    var theme_largeTitleTextAttributes: ThemeDictionaryPicker? {
+        get { return getThemePicker(self, "setLargeTitleTextAttributes:") as? ThemeDictionaryPicker }
+        set { setThemePicker(self, "setLargeTitleTextAttributes:", newValue) }
+    }
 }
 @objc public extension UITabBar
 {
@@ -93,6 +97,14 @@ import UIKit
     var theme_separatorColor: ThemeColorPicker? {
         get { return getThemePicker(self, "setSeparatorColor:") as? ThemeColorPicker }
         set { setThemePicker(self, "setSeparatorColor:", newValue) }
+    }
+    var theme_sectionIndexColor: ThemeColorPicker? {
+        get { return getThemePicker(self, "setSectionIndexColor:") as? ThemeColorPicker }
+        set { setThemePicker(self, "setSectionIndexColor:", newValue) }
+    }
+    var theme_sectionIndexBackgroundColor: ThemeColorPicker? {
+        get { return getThemePicker(self, "setSectionIndexBackgroundColor:") as? ThemeColorPicker }
+        set { setThemePicker(self, "setSectionIndexBackgroundColor:", newValue) }
     }
 }
 @objc public extension UITextField
@@ -214,6 +226,10 @@ import UIKit
     var theme_strokeColor: ThemeCGColorPicker? {
         get { return getThemePicker(self, "setStrokeColor:") as? ThemeCGColorPicker }
         set { setThemePicker(self, "setStrokeColor:", newValue) }
+    }
+    var theme_fillColor: ThemeCGColorPicker?{
+        get { return getThemePicker(self, "setFillColor:") as? ThemeCGColorPicker }
+        set { setThemePicker(self, "setFillColor:", newValue) }
     }
 }
 
