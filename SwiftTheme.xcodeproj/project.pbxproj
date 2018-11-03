@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A2210CB207090BF006BC28D /* NSAttributedString+Merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2210CA207090BF006BC28D /* NSAttributedString+Merge.swift */; };
+		0A2210CD207095F6006BC28D /* UIRefreshControl+TitleAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2210CC207095F6006BC28D /* UIRefreshControl+TitleAttributes.swift */; };
+		0AD183E6204F8B90005F5D85 /* UITextField+PlaceholderAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD183E5204F8B90005F5D85 /* UITextField+PlaceholderAttributes.swift */; };
+		0AD183E7204FA166005F5D85 /* UITextField+PlaceholderAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD183E5204F8B90005F5D85 /* UITextField+PlaceholderAttributes.swift */; };
+		0AD9844A214AC29A0000F1B1 /* NSAttributedString+Merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2210CA207090BF006BC28D /* NSAttributedString+Merge.swift */; };
 		1854EB631C96601E00E865C6 /* AboutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1854EB5D1C96601E00E865C6 /* AboutCell.swift */; };
 		1854EB641C96601E00E865C6 /* ChangeThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1854EB5E1C96601E00E865C6 /* ChangeThemeCell.swift */; };
 		1854EB651C96601E00E865C6 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1854EB5F1C96601E00E865C6 /* ListViewController.swift */; };
@@ -183,6 +188,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0A2210CA207090BF006BC28D /* NSAttributedString+Merge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Merge.swift"; sourceTree = "<group>"; };
+		0A2210CC207095F6006BC28D /* UIRefreshControl+TitleAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRefreshControl+TitleAttributes.swift"; sourceTree = "<group>"; };
+		0AD183E5204F8B90005F5D85 /* UITextField+PlaceholderAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+PlaceholderAttributes.swift"; sourceTree = "<group>"; };
 		1854EB5D1C96601E00E865C6 /* AboutCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutCell.swift; sourceTree = "<group>"; };
 		1854EB5E1C96601E00E865C6 /* ChangeThemeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeThemeCell.swift; sourceTree = "<group>"; };
 		1854EB5F1C96601E00E865C6 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -480,6 +488,9 @@
 				18D642E11C53638200DADEC5 /* UIColorExtension.swift */,
 				18D642E21C53638200DADEC5 /* UIKit+Theme.swift */,
 				18D642E31C53638200DADEC5 /* NSObject+Theme.swift */,
+				0A2210CA207090BF006BC28D /* NSAttributedString+Merge.swift */,
+				0AD183E5204F8B90005F5D85 /* UITextField+PlaceholderAttributes.swift */,
+				0A2210CC207095F6006BC28D /* UIRefreshControl+TitleAttributes.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -741,20 +752,20 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = Gesen;
 				TargetAttributes = {
 					186C86391C857AA900A5FFEA = {
 						CreatedOnToolsVersion = 7.2.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1000;
 					};
 					18D642AC1C53613400DADEC5 = {
 						CreatedOnToolsVersion = 7.2;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1000;
 					};
 					18D642BB1C53615300DADEC5 = {
 						CreatedOnToolsVersion = 7.2;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1000;
 					};
 					A34AD04D1CF6A7A900B54F53 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -762,6 +773,7 @@
 					};
 					A37F8C491F8A393800ABB5EC = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 					A37F8C7A1F8A436800ABB5EC = {
@@ -926,6 +938,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3D5F8191E3C56CD00F901C1 /* ThemeActivityIndicatorViewStylePicker.swift in Sources */,
+				0A2210CD207095F6006BC28D /* UIRefreshControl+TitleAttributes.swift in Sources */,
 				A3A3899D1D8E2FB200797F17 /* ThemeManager+Plist.swift in Sources */,
 				A373E3901E3C348B00ED2F2B /* ThemeCGColorPicker.swift in Sources */,
 				18D642EA1C53638200DADEC5 /* NSObject+Theme.swift in Sources */,
@@ -942,7 +955,9 @@
 				A3D5F8141E3C4D3900F901C1 /* ThemeBarStylePicker.swift in Sources */,
 				18D642E81C53638200DADEC5 /* UIKit+Theme.swift in Sources */,
 				A373E39A1E3C34C600ED2F2B /* ThemeStatusBarStylePicker.swift in Sources */,
+				0A2210CB207090BF006BC28D /* NSAttributedString+Merge.swift in Sources */,
 				A3A389991D8E2F2800797F17 /* ThemeManager+OC.swift in Sources */,
+				0AD183E6204F8B90005F5D85 /* UITextField+PlaceholderAttributes.swift in Sources */,
 				A373E3811E3C341200ED2F2B /* ThemeColorPicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1012,7 +1027,9 @@
 				A37F8C921F8A43B300ABB5EC /* ThemeManager+Plist.swift in Sources */,
 				A37F8C931F8A43B300ABB5EC /* UIColorExtension.swift in Sources */,
 				A37F8C941F8A43B300ABB5EC /* UIKit+Theme.swift in Sources */,
+				0AD9844A214AC29A0000F1B1 /* NSAttributedString+Merge.swift in Sources */,
 				A37F8C951F8A43B300ABB5EC /* NSObject+Theme.swift in Sources */,
+				0AD183E7204FA166005F5D85 /* UITextField+PlaceholderAttributes.swift in Sources */,
 				A37F8C991F8A556600ABB5EC /* ThemeBarStylePicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1121,7 +1138,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlistDemo/PlistDemo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -1143,7 +1160,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.gesen.PlistDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlistDemo/PlistDemo-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -1159,12 +1176,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1215,12 +1234,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1271,7 +1292,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -1292,7 +1313,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.gesen.SwiftTheme;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -1306,7 +1327,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.gesen.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -1320,7 +1341,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.gesen.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -1376,7 +1397,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -1401,7 +1422,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.gesen.TVOSDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -1432,7 +1453,7 @@
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -1462,7 +1483,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
