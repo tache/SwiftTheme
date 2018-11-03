@@ -33,11 +33,7 @@ public enum UIColorInputError : Error {
         let green   = CGFloat((hex3 & 0x0F0) >> 4) / divisor
         let blue    = CGFloat( hex3 & 0x00F      ) / divisor
         
-        if #available(iOS 10.0, tvOS 10.0, *) {
-            self.init(displayP3Red: red, green: green, blue: blue, alpha: alpha)
-        } else {
-            self.init(red: red, green: green, blue: blue, alpha: alpha)
-        }
+        self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
     
     /**
@@ -53,11 +49,7 @@ public enum UIColorInputError : Error {
         let blue    = CGFloat((hex4 & 0x00F0) >>  4) / divisor
         let alpha   = CGFloat( hex4 & 0x000F       ) / divisor
         
-        if #available(iOS 10.0, tvOS 10.0, *) {
-            self.init(displayP3Red: red, green: green, blue: blue, alpha: alpha)
-        } else {
-            self.init(red: red, green: green, blue: blue, alpha: alpha)
-        }
+        self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
     
     /**
@@ -71,11 +63,7 @@ public enum UIColorInputError : Error {
         let green   = CGFloat((hex6 & 0x00FF00) >>  8) / divisor
         let blue    = CGFloat( hex6 & 0x0000FF       ) / divisor
         
-        if #available(iOS 10.0, tvOS 10.0, *) {
-            self.init(displayP3Red: red, green: green, blue: blue, alpha: alpha)
-        } else {
-            self.init(red: red, green: green, blue: blue, alpha: alpha)
-        }
+        self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
     
     /**
@@ -90,11 +78,7 @@ public enum UIColorInputError : Error {
         let blue    = CGFloat((hex8 & 0x0000FF00) >>  8) / divisor
         let alpha   = CGFloat( hex8 & 0x000000FF       ) / divisor
         
-        if #available(iOS 10.0, tvOS 10.0, *) {
-            self.init(displayP3Red: red, green: green, blue: blue, alpha: alpha)
-        } else {
-            self.init(red: red, green: green, blue: blue, alpha: alpha)
-        }
+        self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
     
     /**
